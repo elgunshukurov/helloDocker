@@ -1,0 +1,16 @@
+# yaml json un superseti hesab olunur
+
+spring:
+  profiles:
+    include:
+      -db
+#      -common
+#      -security
+#      -logging
+#      -dateLocalization
+server:
+  port: 9090
+
+
+
+

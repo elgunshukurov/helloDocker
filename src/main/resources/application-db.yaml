@@ -1,0 +1,12 @@
+# yaml json un superseti hesab olunur
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: &connectionUrl jdbc:mysql://${DB_CONNECTION_IP:localhost}:${DB_CONNECTION_PORT:3306}/helloDocker?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&UseSSL=false&UseJDBCComplaintTimezoneShift=true
+    username: &username ${DB_CONNECTION_USERNAME:root}
+    password: &password ${DB_CONNECTION_PASSWORD:password}
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    hibernate.ddl-auto: validate
+    generate-ddl: true
+    show-sql: true

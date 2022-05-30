@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8000:8000"
+
+  prototype:
+    image: prototype
+    restart: always
+    environment:
+      DB_CONNECTION_PORT: mysql
+    ports:
+      - "9090:9090"
+
+volumes:
+  mysql_data:
