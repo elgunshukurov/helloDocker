@@ -5,26 +5,34 @@ services:
   mysql:
     image: mysql
     restart: always
-    volumes:
-      - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8000:8000"
 
-  prototype:
-    image: prototype
+  hello-docker:
+    image: hello-docker:0.0.2
     restart: always
     environment:
-      DB_CONNECTION_PORT: mysql
+      DB_CONNECTION_IP: mysql
+      DB_SCHEMA_NAME: hello-counter
+      DB_CONNECTION_PORT: 3306
     ports:
-      - "9090:9090"
+        - "9000:9000"
+
+  hello-docker2:
+    image: hello-docker:0.0.2
+    restart: always
+    environment:
+      DB_CONNECTION_IP: mysql
+      DB_SCHEMA_NAME: hello_counter2
+      DB_CONNECTION_PORT: 3307
+    ports:
+      - "9001:9000"
 
 volumes:
   mysql_data:

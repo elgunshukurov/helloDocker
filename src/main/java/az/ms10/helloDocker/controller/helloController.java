@@ -1,5 +1,6 @@
 package az.ms10.helloDocker.controller;
 
+import az.ms10.helloDocker.service.CounterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/index")
 @RequiredArgsConstructor
 public class helloController {
-//    private final TravellerService service;
+    private final CounterService service;
 
     @GetMapping("/")
     public String sayHello(){
-        return "Hello World!";
+        return service.sayHello();
     }
 
 
