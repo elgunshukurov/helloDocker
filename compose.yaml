@@ -24,13 +24,13 @@ services:
     volumes:
       - mysql_data2:/var/lib/mysql
 
-  ms10:
-    image: ms10:0.1
+  app:
+    image: my-app:0.0.1
     restart: always
     environment:
-      DB_CONNECTION_IP: mysql2
+      DB_CONNECTION_IP: mysql
     ports:
-      - "9000:9000"
+      - "8080:8080"
 
 #  hello-docker2:
 #    image: service2:0.0.1
