@@ -1,13 +1,12 @@
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+//import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+//import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+//import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 
 
 plugins {
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-//	id 'java-library'
-	id 'com.bmuschko.docker-remote-api' version "$dockerVersion" apply true
+//	id 'com.bmuschko.docker-remote-api' version "$dockerVersion" apply true
 	id 'java'
 }
 
@@ -39,9 +38,6 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-//	runtimeOnly 'com.h2database:h2'
-//	runtimeOnly 'org.postgresql:postgresql:42.3.4'
-
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -53,39 +49,35 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-//tasks.named('wrapper') {
-//	disributionType = Wrapper.DistributionType.ALL
-//}
-
 
 //def javaProjects = [
 //		project('helloDocker')
 //]
 //
 //configure(javaProjects) {
-	task dockerFile(type: Dockerfile, dependsOn: assemble) {
-		destFile.set(project.file('Dockerfile'))
-		from "alpine:$alpineVersion"
-		runCommand 'apk add --no-cache openjdk11'
-		copyFile "build/libs/${project.name}-${project.version}", '/app/'
-		workingDir '/app/'
-		entryPoint 'java'
-		defaultCommand '-jar', "/app/${project.name}-${project.version}"
-	}
-
-	task dockerBuild(type: DockerBuildImage) {
-		inputDir.set(file("$projectDir/."))
-		doLast {
-			println("creating image: $dockerRepoUrl/${project.name}:$version")
-		}
-		images.add("$dockerRepoUrl/${project.name}:$version")
-	}
-
-	task dockerPush(type: DockerPushImage, dependsOn: dockerBuild) {
-		images.add("$dockerRepoUrl/${project.name}:$version")
-
-		registryCredentials.setUsername("$dockerHubUsername")
-		registryCredentials.setPassword("$dockerHubPassword")
-		registryCredentials.setEmail("$dockerHubEmail")
-	}
+//	task dockerFile(type: Dockerfile, dependsOn: assemble) {
+//		destFile.set(project.file('Dockerfile'))
+//		from "alpine:$alpineVersion"
+//		runCommand 'apk add --no-cache openjdk11'
+//		copyFile "build/libs/${project.name}-${project.version}", '/app/'
+//		workingDir '/app/'
+//		entryPoint 'java'
+//		defaultCommand '-jar', "/app/${project.name}-${project.version}"
+//	}
+//
+//	task dockerBuild(type: DockerBuildImage) {
+//		inputDir.set(file("$projectDir/."))
+//		doLast {
+//			println("creating image: $dockerRepoUrl/${project.name}:$version")
+//		}
+//		images.add("$dockerRepoUrl/${project.name}:$version")
+//	}
+//
+//	task dockerPush(type: DockerPushImage, dependsOn: dockerBuild) {
+//		images.add("$dockerRepoUrl/${project.name}:$version")
+//
+//		registryCredentials.setUsername("$dockerHubUsername")
+//		registryCredentials.setPassword("$dockerHubPassword")
+//		registryCredentials.setEmail("$dockerHubEmail")
+//	}
 //}

@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  mysql-db:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  docker-common-1:
+    image: elgunsh/hello-docker:1
+    restart: always
+    environment:
+      DB_CONNECTION_IP: mysql-db
+    ports:
+      - 9091:8888
+  docker-common-2:
+    image: elgunsh/hello-docker:1
+    restart: always
+    environment:
+      DB_CONNECTION_IP: mysql-db
+    ports:
+      - 9092:8888
+#  nginx:
+#    image: gun123/ngnix-docker:0
+#    restart: always
+#    ports:
+#      - 7071:7070
+#    depends_on:
+#      - docker-common-1
+#      - docker-common-2
